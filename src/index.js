@@ -2,20 +2,24 @@ const express = require("express");
 const connectDB = require("./config/connectDB");
 const dotenv = require("dotenv").config({ quiet: true });
 const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 /*//////////////////////////////////////////////////////////////
                               MIDDLEWARES
 //////////////////////////////////////////////////////////////*/
-
+app.use(cookieParser());
 app.use(express.json());
+
 
 /*//////////////////////////////////////////////////////////////
                                  ROUTES
 //////////////////////////////////////////////////////////////*/
 
 app.use("/", authRouter);
+app.use("/", userRouter);
 
 /*//////////////////////////////////////////////////////////////
                         START THE SERVER
