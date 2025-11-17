@@ -9,7 +9,6 @@ const userAuth = async (req, res, next) => {
     }
     // console.log({ token });
     const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
-    // console.log({ verifyToken });
     if (!verifyToken) {
       throw new Error("Invalid Token");
     }
