@@ -7,7 +7,6 @@ const userAuth = async (req, res, next) => {
     if (!token) {
       return res.status(400).json({ message: "token not found" });
     }
-    // console.log({ token });
     const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
     if (!verifyToken) {
       throw new Error("Invalid Token");
@@ -15,7 +14,6 @@ const userAuth = async (req, res, next) => {
     const user = await UserModel.findById(verifyToken.id).select(
       "_id email role"
     );
-    // console.log({ user });
     if (!user) {
       throw new Error("User not found");
     }

@@ -1,13 +1,10 @@
 const authorizeAccess = (...input)=>{
     return function (req,res,next){
-        console.log({input})
-        console.log(req.user.role)
-        const access = input.includes(req.user.role)
-        console.log(access)
+        const access = input.includes(req.user.role);
         if(access){
             next()
         }else{
-            res.status(401).json({message:"Access Denied"})
+            res.status(401).json({message:"Access Denied"});
         }
     }
 }
