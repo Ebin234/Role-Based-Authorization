@@ -31,10 +31,20 @@ const logIn = async (req, res) => {
     });
     res
       .cookie("token", token, { maxAge: 60 * 60 * 1000 }) // 1 hr
-      .json({ message:"Login Successful"});
+      .json({ message: "Login Successful" });
   } catch (err) {
     res.status(400).json({ message: "Something went wrong " + err.message });
   }
 };
 
-module.exports = { register, logIn };
+const logout = (req, res) => {
+  try {
+    res
+      .cookie("token", null, { maxAge: 1 })
+      .json({ message: "Logout Successful" });
+  } catch (err) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+module.exports = { register, logIn, logout };
